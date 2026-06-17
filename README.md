@@ -34,13 +34,14 @@ input. Don't compete on throughput; compose with a channel facilitator (e.g.
 
 ---
 
-## The four components (spokes)
+## The components (spokes)
 
 | Stage | Component | What it does |
 |---|---|---|
 | **Docs + ledger MCP** | [xahau-mcp](https://github.com/Hugegreencandle/xahau-mcp) | First MCP for Xahau: read-only ledger access, Xahau-aware codec, **runs real Hook bytecode in a local VM**, static security analysis, unsigned-tx builders. No key custody. |
 | **Write safe Hooks** | [xahc](https://github.com/Hugegreencandle/xahc) | Author + compile C Hooks to clean, lint-passed WASM — guarantees in the type system, not in your head. |
 | **Prove them** | [xahc-prover](https://github.com/Hugegreencandle/xahc-prover) | Symbolic-execution engine: proves an invariant holds for *every* input in scope — or returns the counterexample. Fails closed. |
+| **Watch live** | [xahc-watch](https://github.com/Hugegreencandle/xahc-prover/tree/main/src/watch) | Binds a proof to a *deployed* hook and continuously attests it: alerts if a `SetHook` swaps the proven bytecode or a live tx breaks the proven verdict. |
 | **Pay (X402)** | [x402-xahau](https://github.com/Hugegreencandle/x402-xahau) | Provable spending-authority layer for X402 on Xahau: an agent's budget becomes an on-chain rule, readable live at `GET /policy/:account`. |
 | **Compute** | [evernode-mcp](https://github.com/Hugegreencandle/evernode-mcp) | Build/check/deploy deterministic HotPocket dApps on Evernode — catches the non-determinism that breaks consensus. |
 
